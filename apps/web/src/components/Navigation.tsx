@@ -26,7 +26,7 @@ const Navigation = () => {
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center gap-2">
-            <span className="text-2xl font-bold">temmora</span>
+            <span className="text-2xl font-extrabold capitalize">temmora</span>
           </div>
 
           <div className="hidden md:flex items-center gap-8">
@@ -51,7 +51,7 @@ const Navigation = () => {
           </div>
 
           <div className="flex items-center gap-5">
-          <Button size="sm">Book a Call</Button>
+            <Button size="sm">Book a Call</Button>
             <ModeToggle />
           </div>
         </div>
