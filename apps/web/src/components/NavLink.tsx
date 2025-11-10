@@ -1,28 +1,43 @@
-import { NavLink as RouterNavLink, NavLinkProps } from "react-router-dom";
-import { forwardRef } from "react";
-import { cn } from "@/lib/utils";
+"use client";
 
-interface NavLinkCompatProps extends Omit<NavLinkProps, "className"> {
-  className?: string;
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { forwardRef, type AnchorHTMLAttributes } from "react";
+import { cn } from "@/lib/utils";
+import type { UrlObject } from "url";
+
+interface NavLinkProps
+  extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "href"> {
+  href: string;
   activeClassName?: string;
   pendingClassName?: string;
 }
 
-const NavLink = forwardRef<HTMLAnchorElement, NavLinkCompatProps>(
-  ({ className, activeClassName, pendingClassName, to, ...props }, ref) => {
+export const NavLink = forwardRef<HTMLAnchorElement, NavLinkProps>(
+  (
+    { href, className, activeClassName, pendingClassName, children, ...props },
+    ref
+  ) => {
+    const pathname = usePathname();
+
+    const isActive = pathname === href;
+    const isPending = false; // Next.js has no built-in pending state
+
     return (
-      <RouterNavLink
+      <Link
+        href={href as unknown as UrlObject}
         ref={ref}
-        to={to}
-        className={({ isActive, isPending }) =>
-          cn(className, isActive && activeClassName, isPending && pendingClassName)
-        }
+        className={cn(
+          className,
+          isActive && activeClassName,
+          isPending && pendingClassName
+        )}
         {...props}
-      />
+      >
+        {children}
+      </Link>
     );
-  },
+  }
 );
 
 NavLink.displayName = "NavLink";
-
-export { NavLink };
