@@ -1,0 +1,22 @@
+{
+  "name": "soroudo-porfolio",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "check": "oxlint",
+    "dev": "pnpm -r dev",
+    "build": "pnpm -r build",
+    "check-types": "pnpm -r check-types",
+    "dev:native": "pnpm --filter native dev",
+    "dev:web": "pnpm --filter web dev"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "oxlint": "^1.12.0"
+  },
+  "packageManager": "pnpm@10.14.0"
+}
